@@ -21,16 +21,16 @@
     <ng-content></ng-content>
 </div>
 <dialog class="dialog" #newFolderDialog>
-    <div *ngIf="newFolderDialog.open" class="w-[400px] rounded-xl px-6 py-4 bg-white">
+    <div class="w-[400px] rounded-xl px-6 py-4 bg-white">
         <div class="w-full flex justify-between items-center">
             <span class="font-medium">Enter a name for the folder</span>
             <button (click)="newFolderDialog.close()" class="transform outline-none rotate-45 text-2xl select-none">+</button>
         </div>
         <div class="my-4">
-            <input (keydown.enter)="menuActionNewFolder(folderName.value)" #folderName autofocus class="border w-full rounded-md px-4 py-1 border-gray-500 outline-blue-300" type="text" placeholder="New Folder">
+            <input (keydown)="onDocumentKeyDown($event)" (keydown.enter)="menuActionNewFolder(folderName)" #folderName autofocus class="border w-full rounded-md px-4 py-1 border-gray-500 outline-blue-300" type="text" placeholder="New Folder">
         </div>
         <div class="mt-8 text-end">
-            <button [disabled]="!folderName.value.trim()" (click)="menuActionNewFolder(folderName.value)" class="outline-none disabled:opacity-20 bg-blue-300 px-4 py-2 rounded-md">Save</button>
+            <button [disabled]="!folderName.value.trim()" (click)="menuActionNewFolder(folderName)" class="outline-none disabled:opacity-20 bg-blue-300 px-4 py-2 rounded-md">Save</button>
         </div>
     </div>
 </dialog>

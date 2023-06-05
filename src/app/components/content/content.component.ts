@@ -42,9 +42,12 @@ export class AppContentComponent implements OnInit, OnDestroy {
         removeEventListener('keydown', this.onDocumentKeyDown.bind(this));
     }
     onDocumentKeyDown(event: KeyboardEvent) {
+        if((<HTMLInputElement>event.currentTarget).tagName === 'INPUT') {
+            return event.stopPropagation();
+        }
         if (event.key === 'Backspace') {
             this.onBackClick()
-          }
+        }
     }
     
     get data(): { title: string, paths: string[] } {
@@ -74,11 +77,15 @@ export class AppContentComponent implements OnInit, OnDestroy {
         this.router.navigate(this.data.paths.length ? this.data.paths : ['/'])
     }
 
-    menuActionNewFolder(folderName: string) {
+    menuActionNewFolder(element: HTMLInputElement) {
+        const folderName = element.value
         if(!folderName || !folderName.trim()) return
         if(this.breadcrumbs) {
-            return this.store.dispatch(createNewFolder({ name: folderName + '.' + this.breadcrumbs.replaceAll('/', '.'), subfolder: true }))
+            element.value = ''
+            this.store.dispatch(createNewFolder({ name: folderName + '.' + this.breadcrumbs.replaceAll('/', '.'), subfolder: true }))
+            return this.newFolderDialog.nativeElement.close()
         }
+        element.value = ''
         this.store.dispatch(createNewFolder({  name: folderName }))
         this.newFolderDialog.nativeElement.close()
     }
