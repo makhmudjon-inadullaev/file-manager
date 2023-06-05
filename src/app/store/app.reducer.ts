@@ -70,8 +70,7 @@ export const reducer = createReducer(
 )
 
 export function appReducer(state: ApplicationState | undefined, action: Action) {
-    if(state) {
-        localStorage.setItem('file-manager', JSON.stringify(reducer(state, action)))
-    }
-    return reducer(state, action)
+    const result = reducer(state, action)
+    localStorage.setItem('file-manager', JSON.stringify(result))
+    return result
 }
