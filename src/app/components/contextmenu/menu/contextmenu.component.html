@@ -1,0 +1,4 @@
+<components-menu-contex [visible]="contextmenu" [x]="contextmenuX" [y]="contextmenuY">
+    <!-- <ng-content *ngIf="contextmenu"></ng-content> -->
+    <components-menu-item *ngFor="let item of items" [item]="item" (close)="contextmenu = false"></components-menu-item>
+</components-menu-contex>

@@ -1,0 +1,16 @@
+<div class="bg-[#E5EAF1] h-[100vh] overflow-hidden">
+    <div class="w-[100vw] select-none h-[95vh] box-border overflow-y-hidden overflow-x-hidden p-16">
+        <app-content class="overflow-hidden" [breadcrumbs]="breadcrumbs">
+            <div class="flex gap-1 flex-wrap">
+                <ng-container *ngFor="let item of data; let i = index">
+                    <ng-container [ngSwitch]="item.type">
+                        <app-file *ngSwitchCase="'file'"  [url]="item.url!" [title]="item.title"></app-file>
+                        <app-folder *ngSwitchCase="'folder'" [path]="item.url!" [title]="item.title"></app-folder>
+                        <span *ngSwitchDefault></span>
+                    </ng-container>
+                </ng-container>
+                <app-trash *ngIf="!breadcrumbs"></app-trash>
+            </div>
+        </app-content>
+    </div>
+</div>

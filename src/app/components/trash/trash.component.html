@@ -1,0 +1,22 @@
+<components-item (contextmenu)="contextMenu.onContextMenu($event); false" (keydown.enter)="handleClick()" (dblclick)="handleClick()">
+    <components-contextmenu #contextMenu [items]="menuItems"></components-contextmenu>
+    <components-icon-trash *ngIf="empty"></components-icon-trash>
+    <components-icon-trash-filled *ngIf="!empty"></components-icon-trash-filled>
+    <p class="line-clamp-2 text-xs">{{ title }}</p>
+</components-item>
+<dialog class="dialog" #emptyTrashDialog>
+    <div class="w-[400px] rounded-xl px-6 py-4 bg-white">
+        <div class="w-full flex justify-between items-center">
+            <span class="font-medium">Cleared Trash</span>
+            <button (click)="emptyTrashDialog.close()" class="transform outline-none rotate-45 text-2xl">+</button>
+        </div>
+        <div>
+           <div>Trash's contents will be irreversibly deleted.</div>
+            <div>Are you sure?</div>
+        </div>
+        <div class="mt-8 gap-2 flex justify-end">
+            <button (click)="emptyTrashDialog.close()" class="focus:border-gray-400 border-2 disabled:opacity-20 hover:bg-gray-200 bg-gray-300 px-4 py-2 rounded-md">Cancel</button>
+            <button autofocus (click)="purgeTrash()" class="focus:border-blue-400 borde-2 disabled:opacity-20 hover:bg-blue-200 bg-blue-300 px-4 py-2 rounded-md">Save</button>
+        </div>
+    </div>
+</dialog>

@@ -1,0 +1,5 @@
+<components-item tabindex="1" (contextmenu)="contextMenu.onContextMenu($event); false" (keydown.enter)="handleClicked($event)" (dblclick)="handleClicked($event)">
+    <components-contextmenu #contextMenu [items]="inTrash ? trashMenuItems : menuItems"></components-contextmenu>
+    <components-icon-file></components-icon-file>
+    <p class="truncate text-xs">{{ title }}</p>
+</components-item>

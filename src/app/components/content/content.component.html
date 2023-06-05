@@ -1,0 +1,50 @@
+<div (contextmenu)="contextMenu.onContextMenu($event); false"  class="w-full h-full bg-white overflow-auto rounded-2xl px-8 py-6 shadow-content">
+    <components-contextmenu #contextMenu [items]="menuItems"></components-contextmenu>
+    <header class="text-2xl font-medium pb-4">
+        <div class="arrow-right" *ngIf="!breadcrumbs">Files</div>
+        <ng-container *ngIf="breadcrumbs">
+            <div class="flex">
+                <a routerLink="/" class="hover:text-gray-900 text-sm font-normal text-gray-400 cursor-pointer">Files</a>
+                <div class="arrow-right  text-gray-400 relative mx-3"></div>
+                <div class="text-sm font-normal flex" *ngFor="let path of data.paths; let i = index">
+                    <button (click)="onPathClick(i)" class="hover:text-gray-900 text-gray-400 cursor-pointer">{{ path | titlecase }}</button>
+                    <div class="arrow-right relative mx-3 text-gray-400"></div>
+                </div>
+            </div>
+
+            <div class="text-3xl my-2 items-center flex gap-3">
+                <button (click)="onBackClick()" class="opacity-50 hover:opacity-100"><components-icon-left></components-icon-left></button>
+                <div class="truncate">{{ data.title | titlecase }}</div>
+            </div>
+        </ng-container>
+    </header>
+    <ng-content></ng-content>
+</div>
+<dialog class="dialog" #newFolderDialog>
+    <div *ngIf="newFolderDialog.open" class="w-[400px] rounded-xl px-6 py-4 bg-white">
+        <div class="w-full flex justify-between items-center">
+            <span class="font-medium">Enter a name for the folder</span>
+            <button (click)="newFolderDialog.close()" class="transform outline-none rotate-45 text-2xl select-none">+</button>
+        </div>
+        <div class="my-4">
+            <input (keydown.enter)="menuActionNewFolder(folderName.value)" #folderName autofocus class="border w-full rounded-md px-4 py-1 border-gray-500 outline-blue-300" type="text" placeholder="New Folder">
+        </div>
+        <div class="mt-8 text-end">
+            <button [disabled]="!folderName.value.trim()" (click)="menuActionNewFolder(folderName.value)" class="outline-none disabled:opacity-20 bg-blue-300 px-4 py-2 rounded-md">Save</button>
+        </div>
+    </div>
+</dialog>
+<dialog class="dialog" #inProgressDialog>
+    <div class="w-[400px] rounded-xl px-6 py-4 bg-white">
+        <div class="w-full flex justify-between items-center">
+            <span class="font-medium">Enter a name for the folder</span>
+            <button (click)="inProgressDialog.close()" class="transform outline-none rotate-45 text-2xl select-none">+</button>
+        </div>
+        <div class="my-4">
+            This feature will be added soon!!!
+        </div>
+        <div class="mt-8 text-end">
+            <button (click)="inProgressDialog.close()" class="outline-none disabled:opacity-20 bg-blue-300 px-4 py-2 rounded-md">Ok</button>
+        </div>
+    </div>
+</dialog>

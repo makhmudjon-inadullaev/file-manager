@@ -1,0 +1,4 @@
+<button (mousedown)="handleClick($event);" (click)="preventPropagation($event)"  [class]="className">
+    <ng-template components-icon></ng-template>
+    <span>{{ item.data.title || 'Empty' }}</span>
+</button>

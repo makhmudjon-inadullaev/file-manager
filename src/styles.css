@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.arrow-right:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+    right: 1px;
+    border-color: var(--color-mg-stroke-default-base);
+    border-style: solid solid none none;
+    border-width: 1px;
+    width: 4px;
+    height: 4px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+
+.custom-border:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: "";
+    border-radius: inherit;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.05);
+}
+
+.dialog {
+    outline: none;
+    padding: 0;
+    opacity: 0;
+    scale: 0;
+    display: block;
+    background-color: transparent;
+    transition: all 0.1s;
+}
+
+.dialog[open] {
+    opacity: 1;
+    scale: 1;
+}
+
+.dialog::backdrop {
+    background: rgba(0,0,0,0.5);
+}
